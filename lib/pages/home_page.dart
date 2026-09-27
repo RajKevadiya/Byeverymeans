@@ -90,10 +90,7 @@ class _Hero extends StatelessWidget {
       ],
     );
 
-    final graphic = const AspectRatio(
-      aspectRatio: 1,
-      child: _AnimatedSelectionArrow(),
-    );
+    final graphic = const AspectRatio(aspectRatio: 1, child: _AnimatedSelectionArrow());
 
     return ContentPadding(
       vertical: wide ? 96 : 72,
@@ -101,17 +98,11 @@ class _Hero extends StatelessWidget {
           ? Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  flex: 3,
-                  child: Reveal(child: copy),
-                ),
+                Expanded(flex: 3, child: Reveal(child: copy)),
                 const SizedBox(width: 64),
                 SizedBox(
                   width: 360,
-                  child: Reveal(
-                    delay: const Duration(milliseconds: 140),
-                    child: graphic,
-                  ),
+                  child: Reveal(delay: const Duration(milliseconds: 140), child: graphic),
                 ),
               ],
             )
@@ -120,10 +111,7 @@ class _Hero extends StatelessWidget {
               children: [
                 Reveal(child: copy),
                 const SizedBox(height: 48),
-                Reveal(
-                  delay: const Duration(milliseconds: 120),
-                  child: graphic,
-                ),
+                Reveal(delay: const Duration(milliseconds: 120), child: graphic),
               ],
             ),
     );
@@ -137,17 +125,13 @@ class _AnimatedSelectionArrow extends StatefulWidget {
   State<_AnimatedSelectionArrow> createState() => _AnimatedSelectionArrowState();
 }
 
-class _AnimatedSelectionArrowState extends State<_AnimatedSelectionArrow>
-    with SingleTickerProviderStateMixin {
+class _AnimatedSelectionArrowState extends State<_AnimatedSelectionArrow> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 4200),
-    )..repeat();
+    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 4200))..repeat();
   }
 
   @override
@@ -161,9 +145,7 @@ class _AnimatedSelectionArrowState extends State<_AnimatedSelectionArrow>
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, _) {
-        return CustomPaint(
-          painter: _SelectionArrowPainter(t: _controller.value),
-        );
+        return CustomPaint(painter: _SelectionArrowPainter(t: _controller.value));
       },
     );
   }
@@ -211,11 +193,7 @@ class _SelectionArrowPainter extends CustomPainter {
     final glowPaint = Paint()
       ..color = _color.withValues(alpha: 0.09 + blurStrength * 0.1)
       ..maskFilter = MaskFilter.blur(BlurStyle.normal, s * 0.09);
-    canvas.drawCircle(
-      Offset.lerp(center, tip, 0.35)!,
-      arrowSize * 0.58,
-      glowPaint,
-    );
+    canvas.drawCircle(Offset.lerp(center, tip, 0.35)!, arrowSize * 0.58, glowPaint);
 
     // Motion-blur ghosts trailing opposite to travel direction.
     if (blurStrength > 0.03) {
@@ -405,14 +383,7 @@ class _SelectionArrowPainter extends CustomPainter {
     final float = math.sin(t * math.pi * 2) * 0.01;
     pos = Offset(pos.dx, pos.dy + float);
 
-    return _ArrowPose(
-      x: pos.dx,
-      y: pos.dy,
-      rotation: rot,
-      scale: scale,
-      press: press,
-      ripple: ripple,
-    );
+    return _ArrowPose(x: pos.dx, y: pos.dy, rotation: rot, scale: scale, press: press, ripple: ripple);
   }
 
   double _pressEnvelope(double localT) {
@@ -457,8 +428,6 @@ class _DarkBanner extends StatelessWidget {
     return Reveal(
       child: Container(
         width: double.infinity,
-
-        // margin: const EdgeInsets.only(top: 10),
         padding: EdgeInsets.symmetric(vertical: wide ? 100 : 80),
         child: ContentPadding(
           child: Column(
